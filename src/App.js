@@ -9,7 +9,7 @@ import Message from './Message';
 function App() {
 
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{name: "zeus", text: "nice"}]);
   const [username, setUsername ] = useState("");
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function App() {
 
   const sendMessage = (event) => {
     event.preventDefault();
-    setMessages([...messages, input]);
+    setMessages([...messages, {name: username, text: input}]);
     setInput("");
   }
 
@@ -49,7 +49,7 @@ function App() {
       {/* <p>{ messages }</p> */}
 
       { messages.map(message => (
-        <Message text={ message } />
+        <Message current={username} user={ message.name } text={ message.text } />
       )) }
     </div>
   );
