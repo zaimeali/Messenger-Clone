@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
+
+// Component
+import Message from './Message';
 
 function App() {
 
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [username, setUsername ] = useState("");
+
+  useEffect(() => {
+    setUsername(
+      prompt("Please! enter your name")
+    );
+  }, [])
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -16,26 +26,30 @@ function App() {
 
   return (
     <div className="App">
-      <FormControl onSubmit={ sendMessage }>
-        <InputLabel>Enter a message...</InputLabel>
-        <Input 
-          value={ input } 
-          onChange={(event) => setInput(event.target.value)} 
-        />
-        <Button 
-          color="primary" 
-          variant="contained" 
-          type="submit"
-          disabled={ !input }
-        >
-          Send Message
-        </Button>
-      </FormControl>
+      { username ? (<h1>Welcome, { username }</h1>) : "" }
+      <form>
+        <FormControl>
+          <InputLabel>Enter a message...</InputLabel>
+          <Input 
+            value={ input } 
+            onChange={(event) => setInput(event.target.value)} 
+          />
+          <Button 
+              color="primary" 
+              variant="contained" 
+              type="submit"
+              disabled={ !input }
+              onClick={ sendMessage }
+            >
+              Send Message
+            </Button>
+        </FormControl>
+      </form>
       {/* <p>{ input }</p> */}
       {/* <p>{ messages }</p> */}
 
       { messages.map(message => (
-        <p>{ message }</p>
+        <Message text={ message } />
       )) }
     </div>
   );
