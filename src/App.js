@@ -48,8 +48,8 @@ function App() {
       {/* <p>{ input }</p> */}
       {/* <p>{ messages }</p> */}
 
-      { messages.map(message => (
-        <Message current={username} user={ message.name } text={ message.text } />
+      { messages.map((message, i) => (
+        <Message key={ i } current={username} user={ message.name } text={ message.text } />
       )) }
     </div>
   );

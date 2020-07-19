@@ -11,11 +11,10 @@ export default function Message({ current, user, text }) {
         <div className={ `message ${isUser && 'message_user'}` }>
             <Card className={ isUser ? "message_userCard" : "message_guestCard" }>
                 <CardContent>
-                    <Typography
-                        color="white"
+                    <Typography 
                         variant="h5"
                         component="h2"
-                        className={ isUser && 'message_userFont' }
+                        className={ `${ isUser && 'message_userFont' }` }
                     >
                         { user }: { text }
                     </Typography>
