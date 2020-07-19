@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
+import { FormControl, Input } from '@material-ui/core';
 
 // Component
 import Message from './Message';
@@ -14,6 +14,10 @@ import { db } from './firebase';
 
 // Flipmove
 import FlipMove from 'react-flip-move';
+
+// Icon
+import { IconButton } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 
 function App() {
 
@@ -29,7 +33,7 @@ function App() {
 
   useEffect(() => {
     db.collection('Messages')
-      .orderBy('timestamp', 'desc')
+      .orderBy('timestamp', 'asc')
       .onSnapshot(snapshot => {
         setMessages(
           snapshot.docs.map(doc => ({id: doc.id, data: doc.data()}))
@@ -50,29 +54,31 @@ function App() {
 
   return (
     <div className="App">
-      { username ? (<h1>Welcome, { username }</h1>) : "" }
+      { username ? (<div className="app_head"><h1>Welcome, { username }</h1><hr /></div>) : "" }
       <form className="app_form">
-        <FormControl>
-          <InputLabel>Enter a message...</InputLabel>
+        <FormControl className="app_formControl">
           <Input 
-            value={ input } 
+            value={ input }
+            placeholder="Enter a message..."
             onChange={(event) => setInput(event.target.value)} 
+            className="app_inputControl"
           />
-          <Button 
+          <IconButton 
               color="primary" 
               variant="contained" 
               type="submit"
               disabled={ !input }
               onClick={ sendMessage }
+              className="app_iconButton"
             >
-              Send Message
-            </Button>
+              <SendIcon />
+            </IconButton>
         </FormControl>
       </form>
       {/* <p>{ input }</p> */}
       {/* <p>{ messages }</p> */}
 
-      <FlipMove>
+      <FlipMove className="up_show">
         { messages.map(({id, data}) => (
           <Message key={ id } current={ username } user={ data.name } text={ data.text } />
         )) }

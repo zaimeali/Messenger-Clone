@@ -9,14 +9,17 @@ const Message = forwardRef(({ current, user, text }, ref) => {
     const isUser = current === user;
     return (
         <div className={ `message ${isUser && 'message_user'}` }>
+            <div className="userDisplayDiv">
+                <small className="userDisplay">{ isUser ? '' : `${user || 'Anonymous'}` }</small>
+            </div>
             <Card className={ isUser ? "message_userCard" : "message_guestCard" }>
                 <CardContent>
                     <Typography 
-                        variant="h5"
+                        variant="h6"
                         component="h2"
                         className={ `${ isUser && 'message_userFont' }` }
                     >
-                        { user }: { text }
+                        { text }
                     </Typography>
                 </CardContent>
             </Card>

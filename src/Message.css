@@ -10,6 +10,20 @@
     text-align: left !important;
 }
 
+.userDisplayDiv{
+    text-align: left;
+}
+
+.MuiCardContent-root{
+    padding-bottom: 14px !important;
+}
+
+.userDisplay{
+    color: gray;
+    margin-left: 2px;
+    margin-bottom: 2px;
+}
+
 .message_userCard{
     background-color: #0b81ff !important;
 }

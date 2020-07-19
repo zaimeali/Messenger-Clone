@@ -2,12 +2,39 @@
   text-align: center;
 }
 
+.app_head{
+  position: fixed;
+  width: 100% !important;
+  background-color: white;
+  z-index: 1;
+  top: 0;
+}
+
 .app_form{
   padding: 20px;
   position: fixed;
   bottom: 0;
   z-index: 1;
-  background-color: #e9e9eb;
+  background-color: white;
   width: 100%;
-  margin: 20px;
+  border-radius: 15px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.app_formControl{
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.app_inputControl{
+  flex: 0.93;
+  margin-left: 15px;
+}
+
+.app_iconButton{
+  flex: 0;
+}
+
+.up_show{
+  bottom: 90px;
 }
