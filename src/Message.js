@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 import { Card, CardContent, Typography } from '@material-ui/core'
 
 // Styling
 import './Message.css'
 
-export default function Message({ current, user, text }) {
+const Message = forwardRef(({ current, user, text }, ref) => {
     const isUser = current === user;
     return (
         <div className={ `message ${isUser && 'message_user'}` }>
@@ -22,4 +22,6 @@ export default function Message({ current, user, text }) {
             </Card>
         </div>
     )
-}
+})
+
+export default Message

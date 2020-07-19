@@ -6,10 +6,16 @@ import { Button, FormControl, Input, InputLabel } from '@material-ui/core';
 // Component
 import Message from './Message';
 
+// firebase
+import firebase from 'firebase';
+
+// dB
+import { db } from './firebase';
+
 function App() {
 
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([{name: "zeus", text: "nice"}]);
+  const [messages, setMessages] = useState([]);
   const [username, setUsername ] = useState("");
 
   useEffect(() => {
@@ -18,9 +24,24 @@ function App() {
     );
   }, [])
 
+  useEffect(() => {
+    db.collection('Messages')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot(snapshot => {
+        setMessages(
+          snapshot.docs.map(doc => doc.data())
+        );
+    })
+  }, [])
+
   const sendMessage = (event) => {
     event.preventDefault();
-    setMessages([...messages, {name: username, text: input}]);
+
+    db.collection('Messages').add({
+      text: input,
+      name: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
     setInput("");
   }
 

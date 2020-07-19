@@ -1,4 +1,5 @@
 1) npm i firebase
+2) npm i react-flip-move
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
