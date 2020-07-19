@@ -1,5 +1,6 @@
 1) npm i firebase
 2) npm i react-flip-move
+3) npm i @material-ui/icons
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

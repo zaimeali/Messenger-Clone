@@ -12,6 +12,9 @@ import firebase from 'firebase';
 // dB
 import { db } from './firebase';
 
+// Flipmove
+import FlipMove from 'react-flip-move';
+
 function App() {
 
   const [input, setInput] = useState("");
@@ -29,7 +32,7 @@ function App() {
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot => {
         setMessages(
-          snapshot.docs.map(doc => doc.data())
+          snapshot.docs.map(doc => ({id: doc.id, data: doc.data()}))
         );
     })
   }, [])
@@ -48,7 +51,7 @@ function App() {
   return (
     <div className="App">
       { username ? (<h1>Welcome, { username }</h1>) : "" }
-      <form>
+      <form className="app_form">
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
           <Input 
@@ -69,9 +72,11 @@ function App() {
       {/* <p>{ input }</p> */}
       {/* <p>{ messages }</p> */}
 
-      { messages.map((message, i) => (
-        <Message key={ i } current={username} user={ message.name } text={ message.text } />
-      )) }
+      <FlipMove>
+        { messages.map(({id, data}) => (
+          <Message key={ id } current={ username } user={ data.name } text={ data.text } />
+        )) }
+      </FlipMove>
     </div>
   );
 }
